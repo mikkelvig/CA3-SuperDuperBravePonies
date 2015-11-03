@@ -11,6 +11,8 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import facades.UserFacade;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -38,7 +40,7 @@ public class Login {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response login(String jsonString) throws JOSEException {
+  public Response login(String jsonString) throws JOSEException, NoSuchAlgorithmException, InvalidKeySpecException {
     JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
     String username =  json.get("username").getAsString(); 
     String password =  json.get("password").getAsString();
@@ -54,7 +56,7 @@ public class Login {
     throw new NotAuthorizedException("Ilegal username or password",Response.Status.UNAUTHORIZED);
   }
   
-  private List<String>  authenticate(String userName, String password){
+  private List<String>  authenticate(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException{
     UserFacade facade = new UserFacade();
     return facade.authenticateUser(userName, password);
   }
