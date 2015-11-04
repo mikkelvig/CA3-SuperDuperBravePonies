@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
+angular.module('myApp.view6', ['ngRoute'])
 
         .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider.when('/view2', {
-                    templateUrl: 'view2/view2.html',
-                    controller: 'View2Ctrl'
+                $routeProvider.when('/view6', {
+                    templateUrl: 'view6/view6.html',
+                    controller: 'View6Ctrl'
                 });
             }])
 
-        .controller('View2Ctrl', function ($http, $scope) {
+        .controller('View6Ctrl', function ($http, $scope) {
             $http({
                 method: 'GET',
                 url: 'api/demouser'
@@ -18,4 +18,5 @@ angular.module('myApp.view2', ['ngRoute'])
             }, function errorCallback(res) {
                 $scope.error = res.status + ": " + res.data.statusText;
             });
+
         });
