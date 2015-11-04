@@ -1,11 +1,9 @@
 <h3>Find Company Information</h3>
 <br>
-<br>
 <div class="form-group"><b>Search text:</b>    
     <input type="text" style="width:10em;" placeholder="Required" class="form-control"
            ng-model="feedback.search">
 </div>
-<br>
 <br>
 <label for="options">Options </label>
 <select name="option" class="form-control" ng-model="feedback.option" >
@@ -16,20 +14,37 @@
     <option value="phone">Phone Number</option>
 </select>
 <br>
-<br>
 <label for="country">Country </label>
 <select name="country" class="form-control" ng-model="feedback.country" >
     <option value="dk">DK</option>     
     <option value="no">NO</option>
 </select>
 <br>
-<br>
 <button type="submit" class="btn btn-success" ng-click="getCompany()">Find</button>
 <br>
 <br>
 <table class="table">
-   <td>{{companylist.name}}</td>
+    <tr><td><b>{{companylist.name}}</b></td></tr>
+     <tr><td><b>CVR: </b>{{companylist.vat}}</td></tr>
+     <tr><td><b>Address: </b> {{companylist.address}}</td></tr>
+     <tr><td><b>Zip+city: </b> {{companylist.zipcode}} {{companylist.city}}</td></tr>
+     <tr><td><b>Start date: </b>{{companylist.startdate}}</td></tr>
+     <tr><td><b>Employees: </b>{{companylist.employees}}</td></tr>
 </table>
+
+<div class="panel panel-default" ng-repeat="unit in companylist.productionunits">
+        <div class="panel-heading">
+          {{unit.name}}
+        </div>
+        <div class="panel-body">
+          <p><b>Addresse:</b> {{unit.address}}</p>
+          <p><b>Post nr.:</b> {{unit.zipcode}}</p>
+          <p><b>By:</b> {{unit.city}}</p>
+          <p><b>Tlf.nr:</b> {{unit.phone}}</p>
+          <p><b>Branchetype:</b> {{unit.industrydesc}}</p>
+        </div>
+</div>
+
 <br>
 <br>
 <div>
