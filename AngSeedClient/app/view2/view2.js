@@ -18,4 +18,16 @@ angular.module('myApp.view2', ['ngRoute'])
             }, function errorCallback(res) {
                 $scope.error = res.status + ": " + res.data.statusText;
             });
+          
+            $scope.getCompany = function () {
+                var url = 'api/company/'+$scope.feedback.option + "/" + $scope.feedback.search+ "/" + $scope.feedback.country;
+                alert("Jeg er inde i getcompany"+url);
+                $http.get(url).then(function successCallback(res) {
+                    $scope.companylist = res.data;
+                }, function errorCallback(res) {
+                $scope.error = res.status + ": " + res.data.statusText;
+            });
+            };
+         
+            
         });
