@@ -1,4 +1,36 @@
-<p>This is the partial for view 2.</p>
+<h3>Find Company Information</h3>
+<br>
+<br>
+<form class="navbar-form navbar-middle" role="form" ng-submit="metode......()">
+<div class="form-group"><b>Search text:</b>    
+    <input type="text" style="width:10em;" placeholder="Required" class="form-control"
+           ng-model="company.....">
+</div>
+<br>
+<br>
+<label for="options">Options </label>
+<select name="option" class="form-control" ng-model="feedback.option" >
+    <option value="Regular">Regular</option>   
+    <option value="CVR">CVR</option>    
+    <option value="Name">Name</option>     
+    <option value="Production Unit">Production Unit</option>
+    <option value="Phone Number">Phone Number</option>
+</select>
+<br>
+<br>
+<label for="country">Country </label>
+<select name="country" class="form-control" ng-model="feedback.country" >
+    <option value="DK">DK</option>     
+    <option value="NO">NO</option>
+</select>
+<br>
+<br>
+<table class="table">
+    <tr ng-repeat="company in companylist"></tr>
+   <td ng-click="(fullInfo(company.name))">{{company.name}}</td>
+</table>
+<br>
+<br>
 <div>
   <p>Data from server (Users ONLY) <b style="color: pink">{{data}}</b></p>
 </div>
