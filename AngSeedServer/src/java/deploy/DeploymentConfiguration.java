@@ -17,7 +17,8 @@ public class DeploymentConfiguration implements ServletContextListener {
 
     public static String PU_NAME = "PU"; //USE the RIGHT name here
 
-    @Override
+  
+    //test
     public void contextInitialized(ServletContextEvent sce) {
         Map<String, String> env = System.getenv();
         //If we are running in the OPENSHIFT environment change the pu-name
@@ -26,7 +27,7 @@ public class DeploymentConfiguration implements ServletContextListener {
         }
     }
 
-    @Override
+ 
     public void contextDestroyed(ServletContextEvent sce) {
     }
 }

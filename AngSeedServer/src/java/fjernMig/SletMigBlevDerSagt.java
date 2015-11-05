@@ -5,7 +5,9 @@
  */
 package fjernMig;
 
+import currency.XmlReaderDemo;
 import entity.User;
+import facades.CurrencyFacade;
 import facades.UserFacade;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -16,17 +18,23 @@ import java.security.spec.InvalidKeySpecException;
  */
 public class SletMigBlevDerSagt {
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
+
         
-        UserFacade f = new UserFacade();
+//        UserFacade f = new UserFacade();
+//        
+//        User user = new User("user","test");
+//        user.AddRole("User");
+//        
+//        User admin = new User("admin","test");
+//        admin.AddRole("Admin");
+//        
+//        f.saveUser(user);
+//        f.saveUser(admin);
+        XmlReaderDemo ce = new XmlReaderDemo();
         
-        User user = new User("user","test");
-        user.AddRole("User");
+        ce.updateCurrency();
         
-        User admin = new User("admin","test");
-        admin.AddRole("Admin");
         
-        f.saveUser(user);
-        f.saveUser(admin);
     }
     
 }
