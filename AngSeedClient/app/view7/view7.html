@@ -4,13 +4,35 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div>
+    <h1>Calculator</h1>
+</div>
+<div>
+    <input type="number" style="width:40em;" placeholder="Required" class="form-control"
+           ng-model="amount">
+    <br>
+    <br>
+    <div class="form-group">  
+        <select name="option" style="width:40em;" class="form-control" ng-model="valuta1" >
+            <option value="fromcurrency" ng-repeat="co in currencylist">{{co.code}}</option>
+        </select>
+        <br>
+        <br>
+        <div class="form-group">
+            <select name="option" style="width:40em;" class="form-control" ng-model="valuta2">
+                <option value="tocurrency" ng-repeat="co in currencylist">{{co.code}}</option>
+            </select>  
+            <br>
+            <br>
+            <div>
+                <button type="button" style="width:40em;" ng-click="calculate">Calculate</button>
+            </div>
+            <h3>{{result}}</h3>
+            <br>
+        </div>
+    </div>   
+</div>
+
+<div>
+    <p>Data from server (Users ONLY 2) <b style="color: pink">{{data}}</b></p>
+</div>
