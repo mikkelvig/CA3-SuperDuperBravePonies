@@ -50,7 +50,7 @@ public class CurrencyFacade extends DefaultHandler {
         EntityManager em = getEntityManager();
         List<Currency>currencyList;
         try {
-            currencyList = em.createNamedQuery("SELECT c FROM Currency c", Currency.class).getResultList();
+            currencyList = em.createQuery("SELECT c FROM Currency c", Currency.class).getResultList();
             return currencyList;
         } finally {
             em.close();
