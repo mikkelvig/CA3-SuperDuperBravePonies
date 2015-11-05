@@ -45,5 +45,16 @@ public class CurrencyFacade extends DefaultHandler {
             em.close();
         }
     }
+    
+    public List<Currency> getAllCurrency() {
+        EntityManager em = getEntityManager();
+        List<Currency>currencyList;
+        try {
+            currencyList = em.createNamedQuery("SELECT c FROM Currency c", Currency.class).getResultList();
+            return currencyList;
+        } finally {
+            em.close();
+        }
+    }
 
 }
