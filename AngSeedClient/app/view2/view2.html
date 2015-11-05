@@ -1,7 +1,7 @@
 <h3>Find Company Information</h3>
 <br>
 <div class="form-group"><b>Search text:</b>    
-    <input type="text" style="width:10em;" placeholder="Required" class="form-control"
+    <input type="text" style="width:80em;" placeholder="Required" class="form-control"
            ng-model="feedback.search">
 </div>
 <br>
@@ -24,29 +24,50 @@
 <br>
 <br>
 <table class="table">
-    <tr><td><b>{{companylist.name}}</b></td></tr>
-     <tr><td><b>CVR: </b>{{companylist.vat}}</td></tr>
-     <tr><td><b>Address: </b> {{companylist.address}}</td></tr>
-     <tr><td><b>Zip+city: </b> {{companylist.zipcode}} {{companylist.city}}</td></tr>
-     <tr><td><b>Start date: </b>{{companylist.startdate}}</td></tr>
-     <tr><td><b>Employees: </b>{{companylist.employees}}</td></tr>
+    <thead>
+        <tr><td><b>{{companylist.name}}</b></td></tr>
+    </thead>
+    <tbody>
+        <tr><td><b>CVR: </b>{{companylist.vat}}</td></tr>
+        <tr><td><b>Address: </b> {{companylist.address}}</td></tr>
+        <tr><td><b>Zip+city: </b> {{companylist.zipcode}} {{companylist.city}}</td></tr>
+        <tr><td><b>Start date: </b>{{companylist.startdate}}</td></tr>
+        <tr><td><b>Employees: </b>{{companylist.employees}}</td></tr>
+    </tbody>
 </table>
 
 <div class="panel panel-default" ng-repeat="unit in companylist.productionunits">
-        <div class="panel-heading">
-          {{unit.name}}
-        </div>
-        <div class="panel-body">
-          <p><b>Addresse:</b> {{unit.address}}</p>
-          <p><b>Post nr.:</b> {{unit.zipcode}}</p>
-          <p><b>By:</b> {{unit.city}}</p>
-          <p><b>Tlf.nr:</b> {{unit.phone}}</p>
-          <p><b>Branchetype:</b> {{unit.industrydesc}}</p>
-        </div>
+    <button type="button" ng-click="getInfoOnSubCompany(unit.name)">{{unit.name}}</button>
+    <!--<label for="registered" class="control-label col-xs-3" ng-click="getInfoOnSubCompany(unit.name)"><span class="label label-info">{{unit.name}}</span></label>-->
 </div>
+
+<table class="table">
+    <thead>
+        <tr><td><b>{{subUnit.name}}</b></td></tr>
+    </thead>
+    <tbody>
+        <tr><td><b>Address: </b> {{subUnit.address}}</td></tr>
+        <tr><td><b>Zip+city: </b> {{subUnit.zipcode}} {{subUnit.city}}</td></tr>
+        <tr><td><b>Phone: </b>{{subUnit.phone}}</td></tr>
+        <tr><td><b>Email: </b>{{subUnit.email}}</td></tr>
+    </tbody>
+</table>
+
+<!--<div class="panel panel-default" ng-repeat="unit in companylist.productionunits">
+    <div class="panel-heading">
+        {{unit.name}}
+    </div>
+    <div class="panel-body">
+        <p><b>Addresse:</b> {{unit.address}}</p>
+        <p><b>Post nr.:</b> {{unit.zipcode}}</p>
+        <p><b>By:</b> {{unit.city}}</p>
+        <p><b>Tlf.nr:</b> {{unit.phone}}</p>
+        <p><b>Branchetype:</b> {{unit.industrydesc}}</p>
+    </div>
+</div>-->
 
 <br>
 <br>
 <div>
-  <p>Data from server (Users ONLY) <b style="color: pink">{{data}}</b></p>
+    <p>Data from server (Users ONLY) <b style="color: pink">{{data}}</b></p>
 </div>

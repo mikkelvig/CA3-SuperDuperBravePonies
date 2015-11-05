@@ -29,5 +29,14 @@ angular.module('myApp.view2', ['ngRoute'])
             });
             };
          
+         $scope.getInfoOnSubCompany = function (name) {
+                alert("Jeg er inde i Infooooooooooooooooooo");
+               for(var i =0; i<$scope.companylist.productionunits.length; i++){
+                 if( $scope.companylist.productionunits[i].name === name){
+                     $scope.subUnit = angular.copy($scope.companylist.productionunits[i])
+                     return;
+                 }     
+               }
+            }
             
         });
