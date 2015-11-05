@@ -19,7 +19,6 @@ angular.module('myApp.view3', ['ngRoute'])
                     });
 
             var url = 'api/demoadmin/users';
-            alert("Jeg er inde get users");
             $http.get(url).then(function successCallback(res) {
                 $scope.userList = res.data;
             }, function errorCallback(res) {
@@ -27,7 +26,6 @@ angular.module('myApp.view3', ['ngRoute'])
 
             $scope.deleteUser = function (userName) {
                 var url = 'api/demoadmin/user/' + userName;
-                alert("Jeg er inde i delete");
                 $http.delete(url).then(function successCallback(res) {
                     $scope.deleteMsg = userName + "Has been deleted";
                 }, function errorCallback(res) {

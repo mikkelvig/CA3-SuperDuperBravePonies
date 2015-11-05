@@ -1,4 +1,27 @@
-<p>This is the partial for view 6.</p>
+<h3>Exchange Rate Info</h3>
+<div class="row">
+    <div class="col-md-9">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Description </td>
+                    <td>Code </td>
+                    <td>Rate </td>
+                    <td>Date </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="currency in currencyList">
+                    <td>{{currency.description}}</td>
+                    <td>{{currency.code}}</td>
+                    <td>{{currency.rate}}</td>
+                    <td>{{currency.date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
 <div>
   <p>Data from server (Users ONLY 2) <b style="color: pink">{{data}}</b></p>
 </div>
