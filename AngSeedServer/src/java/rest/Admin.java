@@ -69,7 +69,7 @@ public class Admin {
     }
     
     @DELETE
-    @Path("user/:id")
+    @Path("user/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void deleteUser(@PathParam("id") String id) {
         u.deleteUser(id);
