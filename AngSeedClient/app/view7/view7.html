@@ -5,21 +5,22 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div>
-    <h1>Calculator</h1>
+    <h1>Calculator service</h1>
 </div>
-<div>
+<br>
+<!--<div>
     <input type="number" style="width:40em;" placeholder="Required" class="form-control"
            ng-model="amount">
     <br>
     <br>
     <div class="form-group">  
-        <select name="option" style="width:40em;" class="form-control" ng-model="valuta1" >
+        <select name="option" style="width:40em;" class="form-control" ng-model="cur.fromcurrency" >
             <option value="fromcurrency" ng-repeat="co in currencylist">{{co.code}}</option>
         </select>
         <br>
         <br>
         <div class="form-group">
-            <select name="option" style="width:40em;" class="form-control" ng-model="valuta2">
+            <select name="option" style="width:40em;" class="form-control" ng-model="cur.tocurrency">
                 <option value="tocurrency" ng-repeat="co in currencylist">{{co.code}}</option>
             </select>  
             <br>
@@ -27,12 +28,36 @@ and open the template in the editor.
             <div>
                 <button type="button" style="width:40em;" ng-click="calculate">Calculate</button>
             </div>
-            <h3>{{result}}</h3>
+            <h3>{{result.result}}</h3>
             <br>
         </div>
-    </div>   
-</div>
+    </div>
+     <button type="button" style="width:40em;" ng-click="hugo()">Calculate</button>
+</div>-->
 
+<div class="col-md-12">
+  <form class="form-inline">
+    <div class="form-group">
+        <p><b>From:</b></p>
+      <select class="form-control" ng-model="currencyFrom">
+        <option ng-repeat="co in currencylist">{{co.code}}</option>
+      </select>
+        <br>
+        <p><b>To:</b></p>
+      <select class="form-control" ng-model="currencyTo">
+        <option ng-repeat="co in currencylist">{{co.code}}</option>
+      </select>
+        <br>
+        <p><b>Amount:</b></p>
+      <input type="number" class="form-control" ng-model="currencyAmount">
+    </div>
+      <br><br>
+    <button type="button" class="btn btn-primary" ng-click="calculatorService()">Calculate</button>
+    <br>
+    <h2>{{result.result}}</h2>
+  </form>
+</div>
+<br><br><br><br>
 <div>
     <p>Data from server (Users ONLY 2) <b style="color: pink">{{data}}</b></p>
 </div>

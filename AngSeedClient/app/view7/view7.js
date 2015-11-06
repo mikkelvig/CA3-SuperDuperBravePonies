@@ -26,13 +26,16 @@ angular.module('myApp.view7', ['ngRoute'])
                 $scope.error = res.status + ": " + res.data.statusText;
             });
 
-
-            $scope.calculate = function () {
-                var url = 'api/currency/calculator/' + $scope.amount + "/" + $scope.fromcurrency + "/" + $scope.tocurrency;
+            
+            $scope.calculatorService = function(){
+                var url = 'api/currency/calculator/' + $scope.currencyAmount + "/" + $scope.currencyFrom + "/" + $scope.currencyTo;
+                
                 $http.get(url).then(function successCallback(res) {
                     $scope.result = res.data;
+                    
                 }, function errorCallback(res) {
                     $scope.error = res.status + ": " + res.data.statusText;
+                    
 
                 });
             };
