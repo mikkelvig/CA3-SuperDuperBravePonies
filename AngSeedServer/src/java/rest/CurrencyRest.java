@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -59,6 +60,19 @@ public class CurrencyRest {
         return gson.toJson(jsonCurrencyList);
         //Hilsen Mikkel aka Rainbow Dash
 
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("calculator/{amount}/{from}/{to}")
+    public String calculateRates(@PathParam("amount")double amount,@PathParam("from") String fromCurrency, @PathParam("to") String toCurrency) {
+        //Først beder vi vores facade om at konvertere, ud fra de indsendte parametre
+        double facadeResult = cf.currencyConverter(amount, fromCurrency, toCurrency);
+        //Derefter lægger vi facadens resultat ind i et json-objekt
+        JsonObject jsonResult = new JsonObject();
+        jsonResult.addProperty("result", facadeResult);
+        
+        return gson.toJson(jsonResult);
     }
 
 }

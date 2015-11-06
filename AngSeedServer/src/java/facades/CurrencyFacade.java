@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
@@ -45,16 +46,38 @@ public class CurrencyFacade extends DefaultHandler {
             em.close();
         }
     }
-    
+
     public List<Currency> getAllCurrency() {
         EntityManager em = getEntityManager();
-        List<Currency>currencyList;
+        List<Currency> currencyList;
         try {
             currencyList = em.createQuery("SELECT c FROM Currency c", Currency.class).getResultList();
             return currencyList;
         } finally {
             em.close();
         }
+    }
+
+    public Currency getCurrencyByCode(String code) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Currency> qu = em.createQuery("SELECT c FROM Currency c WHERE c.code = :code", Currency.class);
+            qu.setParameter("code", code);
+            qu.setMaxResults(1);
+
+            Currency c = qu.getSingleResult();
+            return c;
+        } finally {
+            em.close();
+        }
+    }
+
+    public double currencyConverter(double amount, String from, String to) {
+        Currency currencyFrom = getCurrencyByCode(from);
+        Currency currencyTo = getCurrencyByCode(to);
+
+        double result = amount * currencyFrom.getRate() / currencyTo.getRate();
+        return result;
     }
 
 }
