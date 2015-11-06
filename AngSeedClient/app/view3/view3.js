@@ -15,7 +15,7 @@ angular.module('myApp.view3', ['ngRoute'])
                         $scope.data = data;
                     })
                     .error(function (data, status, headers, config) {
-
+                        $scope.error = res.status + ": " + res.data.statusText;
                     });
 
             var url = 'api/demoadmin/users';

@@ -20,7 +20,6 @@ angular.module('myApp.view6', ['ngRoute'])
             });
 
             var url = 'api/currency/dailyrates';
-            alert("Jeg er inde get currency");
             $http.get(url).then(function successCallback(res) {
                 $scope.currencyList = res.data;
             }, function errorCallback(res) {
