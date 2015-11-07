@@ -54,6 +54,17 @@ public class TestsOfOurRestApis {
         //waiting for all the server threads to terminate so we can exit gracefully
         server.join();
     }
+    
+    @Test
+    public void SaveUser() {
+        given().
+                contentType("application/json").
+                body("{'username':'Bubba','password':'rainbowdash'}").
+                when().
+                post("/adduser").
+                then().
+                statusCode(204);
+    }
 
     @Test
     public void testGetCurrency() {
@@ -212,7 +223,7 @@ public class TestsOfOurRestApis {
 
     @Test
     public void testDeleteUserAsAdmin() throws InterruptedException {
-        Thread.sleep(30000);
+        Thread.sleep(90000);
         String json = given().
                 contentType("application/json").
                 body("{'username':'admin','password':'test'}").
@@ -259,14 +270,5 @@ public class TestsOfOurRestApis {
                 statusCode(401);
     }
     
-    @Test
-    public void SaveUser() {
-        given().
-                contentType("application/json").
-                body("{'username':'Bubba','password':'rainbowdash'}").
-                when().
-                post("/adduser").
-                then().
-                statusCode(204);
-    }
+    
 }

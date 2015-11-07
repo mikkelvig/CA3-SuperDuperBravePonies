@@ -29,7 +29,7 @@ public class Company
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{option}/{search}/{country}")
-    public String getSomething(@PathParam("option") String option, @PathParam("search") String search, @PathParam("country") String country) throws MalformedURLException, IOException {
+    public String getCompany(@PathParam("option") String option, @PathParam("search") String search, @PathParam("country") String country) throws MalformedURLException, IOException {
         
         String urlToUse = "http://cvrapi.dk/api?" + option + "=" + search + "&country=" + country;
 
