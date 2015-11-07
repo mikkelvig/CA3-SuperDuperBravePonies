@@ -11,6 +11,329 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Documentation</div>
+
+        <h1>Documentation</h1><br>
+        <br>
+        <a href="https://github.com/mikkelvig/CA3-SuperDuperBravePonies"><h4><b>Link til GitHub repository</b></h4></a>
+        <br>
+        <h4><b>CA 3 – Open Data with AngularJS and REST</b></h4>
+        <h4><b>Bente Andersen, Steffen Juhl Madsen & Mikkel Vig</b></h4>
+        <br>
+        <h4><b>Teststrategi og resultater:</b></h4>
+        <p>Til dette projekt, har vi både benyttet os af JUnit-tests, RestAssured-tests og Karma-tests. JUnit-tests er blevet brugt, til at teste metoderne i vores facader,
+            RestAssured-tests til at teste vores Rest-Api'er, og Karma-tests til frontend. Vi har forsøgt at overholde kravene defineret i opgaveformuleringen, således at vi, i 
+            eksempelvis Api-tests, både tester på en "happy-path", men også uautoriseret adgang og såkaldt "malformed input".</p>
+        <p>I forhold til Karma-test:</p>
+        <p>Karma-tests forvoldte, helt som forventet, en del problemer, så her er en kort beskrivelse af de udfordringer vi stod overfor.</p>
+        <p>Vi prøvede at teste getCompany i view 2, men fik en besked om at "option" var undefined. Derudover prøvede vi at teste på at tilføje en bruger, for derefter at slette ham igen i view 3. 
+            Her fik vi dog en besked om at den fik et unsatisfied request. Vi har derfor udkommenteret koden, men det er da lidt ærgerligt. Vi prøvede at få hjælp af hjælpelærerne, 
+            men de kunne desværre ikke helt knække nøden, og der var ikke feedback på: <a href="http://qa-salcphbusiness.rhcloud.com/index.php/158/how-to-test-our-get-call-with-user-input-in-karma">
+                http://qa-salcphbusiness.rhcloud.com/index.php/158/how-to-test-our-get-call-with-user-input-in-karma</a>.</p>
+        <img src="view5/images/fejl1.jpg" alt="error_1" style="width: 50%; height: 50%">
+        <img src="view5/images/fejl2.jpg" alt="error_2" style="width: 50%; height: 50%">
+        <br><br>
+        <p><b>Testresultater</b></p>
+        <p><b>Karma-tests:</b></p>
+        <img src="view5/images/KarmaTest.jpg" alt="karmaTests" style="width: 70%; height: 70%">
+        <br><br><p><b>RestAssured-tests:</b></p>
+        <img src="view5/images/TestOfRest.png" alt="restTests">
+        <br><br><p><b>JUnit-tests af CurrencyFacade:</b></p>
+        <img src="view5/images/currencyunittest.jpg" alt="currencyFacade">
+        <br><br><p><b>JUnit-tests af UserFacade:</b></p>
+        <img src="view5/images/unittestuservirker.jpg" alt="userFacade">
+        <br><br>
+        <p><b>Testcases</b></p>
+        <p>Følgende tabeller indeholder de forskellige tests vi har lavet til opgaven med navn, formål, input og resultat.</p>
+        <br>
+        <p><b>RestAssured tests</b></p>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td><b>Navn</b></td>
+                            <td><b>Formål</b></td>
+                            <td><b>Input</b></td>
+                            <td><b>Output</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Save user</td>
+                            <td>Vi tester om man kan gemme en bruger med POST i url'en: "/adduser"</td>
+                            <td>"{'username':'Bubba','password':'rainbowdash'}"</td>
+                            <td>Status 204</td>
+                        </tr>
+                        <tr>
+                            <td>Get currency as user</td>
+                            <td>Vi tester om man kan bruge GET på url'en: "/currency/dailyrates" logget ind som User</td>
+                            <td>"/currency/dailyrates"</td>
+                            <td>Status 200</td>
+                        </tr>
+                        <tr>
+                            <td>Get currency without login</td>
+                            <td>Vi tester om man kan bruge GET på url'en: "/currency/dailyrates" uden at være logget ind</td>
+                            <td>"/currency/dailyrates"</td>
+                            <td>Status 401</td>
+                        </tr>
+                        <tr>
+                            <td>Get currency as Admin</td>
+                            <td>Vi tester om man kan bruge GET på url'en: "/currency/dailyrates" logget ind som Admin</td>
+                            <td>"/currency/dailyrates"</td>
+                            <td>Status 403</td>
+                        </tr>
+                        <tr>
+                            <td>Get calculateRates as User</td>
+                            <td>Vi tester om man kan bruge calculateRates-metoden logget ind som User</td>
+                            <td>"/currency/calculator/50/USD/MYR"</td>
+                            <td>Status 200</td>
+                        </tr>
+                        <tr>
+                            <td>Get calculateRates as Admin</td>
+                            <td>Vi tester om man kan bruge calculateRates-metoden logget ind som Admin</td>
+                            <td>"/currency/calculator/50/USD/MYR"</td>
+                            <td>Status 403</td>
+                        </tr>
+                        <tr>
+                            <td>Find company by CVR</td>
+                            <td>Vi tester om man kan bruge findCompany-metoden fra Api'et "Company"</td>
+                            <td>"/company/vat/31678021/dk"</td>
+                            <td>Status 200</td>
+                        </tr>
+                        <tr>
+                            <td>Find company by Name</td>
+                            <td>Vi tester om man kan bruge findCompany-metoden fra Api'et "Company"</td>
+                            <td>"/company/name/EA Copenhagen Business/dk"</td>
+                            <td>Status 200</td>
+                        </tr>
+                        <tr>
+                            <td>Find company fail</td>
+                            <td>Vi tester hvad der sker hvis man bruger findCompany-metoden fra Api'et "Company", på noget der ikke er der</td>
+                            <td>"/company/name/scoobydoobydoo/dk"</td>
+                            <td>Status 500</td>
+                        </tr>
+                        <tr>
+                            <td>Get all users as Admin</td>
+                            <td>Vi tester om man, logget ind som Admin, har adgang til getAllUsers</td>
+                            <td>"/demoadmin/users"</td>
+                            <td>Status 200</td>
+                        </tr>
+                        <tr>
+                            <td>Get all users as User</td>
+                            <td>Vi tester om man, logget ind som User, har adgang til getAllUsers</td>
+                            <td>"/demoadmin/users"</td>
+                            <td>Status 403</td>
+                        </tr>
+                        <tr>
+                            <td>Delete user as Admin</td>
+                            <td>Vi tester om man, logget ind som Admin, kan slette en bruger</td>
+                            <td>"/demoadmin/user/Bubba"</td>
+                            <td>Status 204</td>
+                        </tr>
+                        <tr>
+                            <td>Delete user as User</td>
+                            <td>Vi tester om man, logget ind som User, kan slette en bruger</td>
+                            <td>"/demoadmin/user/Bubba"</td>
+                            <td>Status 403</td>
+                        </tr>
+                        <tr>
+                            <td>Delete user without login</td>
+                            <td>Vi tester om man, uden login, kan slette en bruger</td>
+                            <td>"/demoadmin/user/Bubba"</td>
+                            <td>Status 401</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <p><b>JUnit-tests af UserFacade</b></p>
+                    <thead>
+                        <tr>
+                            <td><b>Navn</b></td>
+                            <td><b>Formål</b></td>
+                            <td><b>Input</b></td>
+                            <td><b>Output</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><p>insertOneNewUserInDatabase</p></td>
+                            <td><p>Vi tester på om vores save-metode gemmer en specifik user i databasen. Derefter trækker vi den samme user op af databasen.</p></td>
+                            <td><p>Name: pony,<br> Password: ponytail</p></td>
+                            <td><p>assertEquals true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>getOneUserByName</p></td>
+                            <td><p>Tester på om vores metode getUserByUserId kan hente en specifik user fra vores database fra et givent id som er navnet.</p></td>
+                            <td><p>Name: pony</p></td>
+                            <td><p>assertEquals true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>getAllUsersFromTheDatabase</p></td>
+                            <td><p>At teste på om metoden getUsers henter alle Useres i vores database.
+                                    Vi lægger user'ne i en liste, og asserter at antallet af users er det samme i databasen.</p></td>
+                            <td><p>Size: 3</p></td>
+                            <td><p>assertEquals 3 true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>deleteOneUserFromTheDatabase</p></td>
+                            <td><p>Vi tester på om vores metode deleteUser sletter en User fra vores database. Vi vil forsøge at trække vores slettede User op fra databasen som ikke burde være der.</p></td>
+                            <td><p>Navn: pony</p></td>
+                            <td><p>en Exception</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <p><b>JUnit-tests af CurrencyFacade</b></p>
+                    <thead>
+                        <tr>
+                            <td><b>Navn</b></td>
+                            <td><b>Formål</b></td>
+                            <td><b>Input</b></td>
+                            <td><b>Output</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><p>saveCurrencyInDatabase</p></td>
+                            <td><p>Vi Tester vores saveCurrency metode ved at tilføje en ny Currency til vores database, og derefter trække den op fra databasen via Code og se om det er det samme.</p></td>
+                            <td><p>Code: SM<br>Description: SMARTIES KRONER<br>Rate: 100<br>dag:  2015-11-05</p></td>
+                            <td><p>assertEquals true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>getAllCurrencyfromCurrencyList</p></td>
+                            <td><p>Tester på om getAllCurrency metoden fungerer korrekt, ved trække hele databasen op, og se om størrelsen af det array vi trækker ud, er ens med antallet af rækker i databasen</p></td>
+                            <td><p>Size: 34</p></td>
+                            <td><p>AssertEquals 34 true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>getOneCurrecyByCode</p></td>
+                            <td><p>Vi tester vores metode getCurrencyByCode ved at trække en specifik Code op af databasen og sammenligne med vores input code.</p></td>
+                            <td><p>Code: MYR</p></td>
+                            <td><p>AssertEquals true</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>valutaConvertUsdToMyr</p></td>
+                            <td><p>Vi tester vores currencyConverter metode, for at se om vores converter beregner rigtigt. Vi tilføjer hvilken Code vi vil converte fra, og hvilken valuta det skal convertes til.</p></td>
+                            <td><p>From: usd<br>To: myr</p></td>
+                            <td><p>AssertEquals 214.9263091878332 true</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <p><b>Karma testCases</b></p>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td><b>Navn</b></td>
+                            <td><b>Formål</b></td>
+                            <td><b>Input</b></td>
+                            <td><b>Output</b></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>View3 controller</td>
+                            <td>Tjekke at vores view kalder controlleren, og kan hente den besked og tidsinterval, ud vi har sagt den skal hente.</td>
+                            <td>Vi laver en testResponse variabel og sætter:” I am in view 3” i message, samt:” 11-07-2015 07:35:21” ind i serverTime og 
+                                kalder controlleren i view 3 med dette data input.</td>
+                            <td>Vi kan nu se: ”msg view 3: I am in view 3”, samt: ” serverTime view 3: 11-07-2015 07:35:21” i konsollen.</td>
+                        </tr>
+                        <tr>
+                            <td>View3 http GET kald igennem controlleren</td>
+                            <td>Tjekke at vores view kalder controlleren og kan lave et GET kald, så vi kan hente en liste af personer ud af userList og 
+                                tjekke om de er indsat på en bestemt position.</td>
+                            <td>Vi laver et testUserList Array og sætter: ” tomBrady” ind på 0 position i arrayet samt ”ronGronkowski” ind på 1 position 
+                                i arrayet, kalder http GET kald igennem controlleren i view 3 med dette userList input.</td>
+                            <td>Vi kan nu se: ”user 0: tomBrady” og ” user 1: ronGronkowski” i consollen.</td>
+                        </tr>
+                        <tr>
+                            <td>View3 http GET kald igennem controlleren</td>
+                            <td>Tjekke at vores view kalder controlleren og kan lave et GET kald, så vi kan hente en liste af personer ud af userList og 
+                                tjekke længden af arrayet.</td>
+                            <td>Vi laver et testUserList Array og sætter: ” tomBrady” ind på 0 position i arrayet samt ”ronGronkowski” ind på 1 position 
+                                i arrayet, kalder http GET kald igennem controlleren i view 3 med dette userList input.</td>
+                            <td>Vi kan nu se: ”userlist length: 2” i konsollen.</td>
+                        </tr>
+                        <tr>
+                            <td>View6 http GET kald igennem controlleren</td>
+                            <td>Tjekke at vores view kalder controlleren og kan lave et GET kald, så vi kan hente en liste af currencies ud af currencyList
+                                og tjekke om de er indsat på en bestemt position.</td>
+                            <td>Vi laver et testCurrencyList Array og sætter: ” MonopolyKroner” ind som description på 0 position i arrayet samt ” MP” ind
+                                som code på 1 position i arrayet, kalder http GET kald igennem controlleren i view 3 med dette currencyList input.</td>
+                            <td>Vi kan nu se: ” currency 0: MonopolyKroner”, samt: ” currency 1: MP” i consollen.</td>
+                        </tr>
+                        <tr>
+                            <td>View6 http GET kald igennem controlleren</td>
+                            <td>Tjekke at vores view kalder controlleren og kan lave et GET kald, så vi kan hente en liste af currencies ud af currencyList 
+                                og tjekke længden af arrayet.</td>
+                            <td>Vi laver et testCurrencyList Array og sætter: ” MonopolyKroner” ind som description på 0 position i arrayet samt 
+                                ”MatadorPenge” ind som description på 1 position i arrayet, kalder http GET kald igennem controlleren i view 3 med dette 
+                                currencyList input.</td>
+                            <td>Vi kan nu se: ”currencyList length: 2” i consollen.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h4><b>Hvem har lavet hvad:</b></h4>
+        <p>
+            I dette projekt har vi både arbejdet i fællesskab, samt delt arbejdsopgaverne ud. Dette har vi gjort for bedre at kunne bruge hinandens kompetancer 
+            samt brainstorme på de svære opgaver.
+            Entitets-klasserne, opstart på opgave 2 & 3 samt dokumentation, lavede vi derfor sammen, og derefter arbejdede vi hver for sig, fordelt på følgende 
+            måde:
+        </p>
+        <p>
+            Steffen stod for deployment til openshift, J-Unit test samt lidt frontend.
+            Mikkel lavede Facade-klasser, Rest-Api'er, lidt frontend samt RestAssured tests.
+            Bente lavede frontend samt karma test.
+        </p>
+        <p>
+            I forhold til hvor mange point vi hver skal have for indsats:</p>
+        <p>
+            I tilfælde af at ovenstående beskrivelse, samt et kig på git commits, fortæller noget andet, er vi i gruppen enige om, 
+            at alle har ydet ca samme arbejdsindsats. På trods af, at vi denne gang har arbejdet hver for sig, 
+            har vi dog stadig siddet sammen mindst 8 timer alle dagene. Der er ingen der føler sig snydt, eller føler de har båret det tungeste læs, 
+            derfor er det kun fair, at alle får 6 point.
+        </p>
+        <br>
+        <h4><b>Test af system:</b></h4>
+        <p><b>Postman</b></p>
+        <p>
+            Vi ville gerne have testet vores Rest-Api i postman, men det kræver at man kan logge ind med token based authentication, og det kunne vi ikke finde ud af. Desuden fik vi ingen respons, da vi spurgte på:
+            <a href="http://qa-salcphbusiness.rhcloud.com/index.php/176/hvordan-logger-ind-postman-med-token-based-authentication"></a>
+        </p>
+        <br>
+        <h4><b>Brug af hjemmeside:</b></h4>
+        <p>
+            På forsiden kan man se hvem der har lavet projektet, samt billeder af os. Derudover kan man via menubaren øverst, navigere videre til siderne dokumentation eller login. Ydermere kan man i højre hjørne logge ind. I databasen er der på forhånd oprettet en user rolle og en admin rolle, som man kan logge ind med vha. "user" eller "admin" som brugernavn, og "test" som password. 
+            Med hensyn til admin var dette vigtigt, da man ikke selv kan oprette en admin rolle på hjemmesiden, og dermed ikke ville have haft mulighed til at tilgå siden: "All users". 
+        </p><br><p>
+            På siden Create User kan man oprette en ny user i databasen, så man har mulighed for at tilgå user siderne: "Company Info", "Exchange Rate Info" samt "Calculator" på hjemmesiden.
+        </p><br><p>
+            På siden Company Info kan man som user søge informationer om et firmas informationer, og få informationer via cvr registrets hjemmeside. Har firmaet underafdelinger, vises de under hovedfirmaet i en tabel.
+        </p><br><p>
+            På siden Exchange Rate Info kan man som user se en tabel med information om 33 forskellige kurser samt hvilken dato de er hentet fra Den Danske Nationalbanks hjemmeside. 
+        </p><br><p>
+            På siden Calculator kan man som user beregne hvad det vil koste at omregne et beløb fra en kurs til en anden.   
+        </p><br><p>
+            På siden All Users kan man som admin se en tabel over alle users, hvilke roller de har, samt slette dem. Dette sker ved at trykke på delete, ud fra den user man ønsker at slette.
+        </p>
+
     </body>
 </html>
