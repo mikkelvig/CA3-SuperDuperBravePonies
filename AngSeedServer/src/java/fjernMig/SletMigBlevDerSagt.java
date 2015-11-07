@@ -20,16 +20,16 @@ public class SletMigBlevDerSagt {
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
 
         
-//        UserFacade f = new UserFacade();
-//        
-//        User user = new User("user","test");
-//        user.AddRole("User");
-//        
-//        User admin = new User("admin","test");
-//        admin.AddRole("Admin");
-//        
-//        f.saveUser(user);
-//        f.saveUser(admin);
+        UserFacade f = new UserFacade();
+        
+        User user = new User("user","test");
+        user.AddRole("User");
+        
+        User admin = new User("admin","test");
+        admin.AddRole("Admin");
+        
+        f.saveUser(user);
+        f.saveUser(admin);
         XmlReaderDemo ce = new XmlReaderDemo();
         
         ce.updateCurrency();

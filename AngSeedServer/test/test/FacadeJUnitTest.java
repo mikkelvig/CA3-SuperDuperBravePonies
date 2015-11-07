@@ -50,8 +50,6 @@ public class FacadeJUnitTest {
         
         Currency cu0 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
         Currency cu1 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
-        Currency cu2 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
-        Currency cu3 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
         Currency cu = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
         List<Currency> c = new ArrayList();
         c.add(cu0);
