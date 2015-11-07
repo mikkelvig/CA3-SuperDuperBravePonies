@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import security.EntityNotFoundException;
 
 @Path("demoadmin")
 @RolesAllowed("Admin")
@@ -42,7 +43,7 @@ public class Admin {
     @GET
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getUsers() {
+    public String getUsers() throws EntityNotFoundException {
         //Facaden henter alle brugere, og sætter dem ind i denne liste.
         List<User> userObjects = u.getUsers();
         //Denne liste kommer til at indeholde alle brugere i json-format.
@@ -71,7 +72,7 @@ public class Admin {
     @DELETE
     @Path("user/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void deleteUser(@PathParam("id") String id) {
+    public void deleteUser(@PathParam("id") String id) throws EntityNotFoundException {
         u.deleteUser(id);
     }
 

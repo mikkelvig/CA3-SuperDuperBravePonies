@@ -13,71 +13,105 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import org.xml.sax.helpers.DefaultHandler;
+import security.EntityNotFoundException;
 
 /**
  *
  * @author steffen
  */
-public class CurrencyFacade extends DefaultHandler {
+public class CurrencyFacade extends DefaultHandler
+{
 
     EntityManagerFactory emf;
 
-    public CurrencyFacade() {
+    public CurrencyFacade()
+    {
         emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
     }
 
-    EntityManager getEntityManager() {
+    EntityManager getEntityManager()
+    {
         return emf.createEntityManager();
     }
 
-    public void saveCurrency(List<Currency> currencyList) {
+    public void saveCurrency(List<Currency> currencyList)
+    {
 
         EntityManager em = getEntityManager();
 
-        try {
+        try
+        {
             em.getTransaction().begin();
-            for (int i = 2; i < currencyList.size(); i++) {
+            for (int i = 2; i < currencyList.size(); i++)
+            {
                 em.persist(currencyList.get(i));
 
             }
             em.getTransaction().commit();
 
-        } finally {
+        } finally
+        {
             em.close();
         }
     }
 
-    public List<Currency> getAllCurrency() {
+    public List<Currency> getAllCurrency() throws EntityNotFoundException
+    {
         EntityManager em = getEntityManager();
         List<Currency> currencyList;
-        try {
+        try
+        {
             currencyList = em.createQuery("SELECT c FROM Currency c", Currency.class).getResultList();
-            return currencyList;
-        } finally {
+        } finally
+        {
             em.close();
+        }
+        if (currencyList == null)
+        {
+            throw new EntityNotFoundException("No Currency found in the database");
+        } else
+        {
+            return currencyList;
         }
     }
 
-    public Currency getCurrencyByCode(String code) {
+    public Currency getCurrencyByCode(String code) throws EntityNotFoundException
+    {
         EntityManager em = getEntityManager();
-        try {
+        Currency c;
+        try
+        {
             TypedQuery<Currency> qu = em.createQuery("SELECT c FROM Currency c WHERE c.code = :code", Currency.class);
             qu.setParameter("code", code);
             qu.setMaxResults(1);
 
-            Currency c = qu.getSingleResult();
-            return c;
-        } finally {
+            c = qu.getSingleResult();
+        } finally
+        {
             em.close();
+        }
+        if (c == null)
+        {
+            throw new EntityNotFoundException("No currency found with requested code");
+        } else
+        {
+            return c;
         }
     }
 
-    public double currencyConverter(double amount, String from, String to) {
+    public double currencyConverter(double amount, String from, String to) throws EntityNotFoundException
+    {
         Currency currencyFrom = getCurrencyByCode(from);
         Currency currencyTo = getCurrencyByCode(to);
 
-        double result = amount * currencyFrom.getRate() / currencyTo.getRate();
-        return result;
+        if (currencyTo == null || currencyFrom == null)
+        {
+            throw new EntityNotFoundException("Currency not found");
+        } else
+        {
+             double result = amount * currencyFrom.getRate() / currencyTo.getRate();
+             return result;
+        }
     }
 
 }

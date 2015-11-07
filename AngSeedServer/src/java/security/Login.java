@@ -40,7 +40,7 @@ public class Login {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response login(String jsonString) throws JOSEException, NoSuchAlgorithmException, InvalidKeySpecException {
+  public Response login(String jsonString) throws JOSEException, NoSuchAlgorithmException, InvalidKeySpecException, EntityNotFoundException {
     JsonObject json = new JsonParser().parse(jsonString).getAsJsonObject();
     String username =  json.get("username").getAsString(); 
     String password =  json.get("password").getAsString();
@@ -56,7 +56,7 @@ public class Login {
     throw new NotAuthorizedException("Ilegal username or password",Response.Status.UNAUTHORIZED);
   }
   
-  private List<String>  authenticate(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException{
+  private List<String>  authenticate(String userName, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, EntityNotFoundException{
     UserFacade facade = new UserFacade();
     return facade.authenticateUser(userName, password);
   }

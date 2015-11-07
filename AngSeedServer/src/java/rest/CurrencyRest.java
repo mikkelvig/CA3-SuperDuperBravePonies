@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import security.EntityNotFoundException;
 
 /**
  *
@@ -38,7 +39,7 @@ public class CurrencyRest {
     @GET
     @Path("dailyrates")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllCurrency() {
+    public String getAllCurrency() throws EntityNotFoundException {
         //Vi henter alle currency-objekter fra databasen og lægger dem i currencyList
         List<Currency> currencyList = cf.getAllCurrency();
         //Dette er en ny liste som skal indeholde alle Currency-objekter i json-format
@@ -65,7 +66,7 @@ public class CurrencyRest {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("calculator/{amount}/{from}/{to}")
-    public String calculateRates(@PathParam("amount")double amount,@PathParam("from") String fromCurrency, @PathParam("to") String toCurrency) {
+    public String calculateRates(@PathParam("amount")double amount,@PathParam("from") String fromCurrency, @PathParam("to") String toCurrency) throws EntityNotFoundException {
         //Først beder vi vores facade om at konvertere, ud fra de indsendte parametre
         double facadeResult = cf.currencyConverter(amount, fromCurrency, toCurrency);
         //Derefter lægger vi facadens resultat ind i et json-objekt

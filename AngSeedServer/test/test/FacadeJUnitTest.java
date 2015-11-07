@@ -19,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.xml.sax.Attributes;
+import security.EntityNotFoundException;
 
 /**
  *
@@ -46,7 +47,7 @@ public class FacadeJUnitTest {
     }
     
     @Test
-    public void saveCurrencyInDatabase(){
+    public void saveCurrencyInDatabase() throws EntityNotFoundException{
         
         Currency cu0 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
         Currency cu1 = new Currency("SM", "SMARTIES KRONER", 100, "2015-11-05");
@@ -63,19 +64,19 @@ public class FacadeJUnitTest {
     }
 
     @Test
-    public void getAllCurrencyfromCurrencyList(){
+    public void getAllCurrencyfromCurrencyList() throws EntityNotFoundException{
     
         List<Currency> c = f.getAllCurrency();
         assertEquals(c.size(),34);
     }
     @Test
-    public void getOneCurrecyByCode(){
+    public void getOneCurrecyByCode() throws EntityNotFoundException{
         String code ="myr";
         Currency c = f.getCurrencyByCode(code);
         assertEquals(c.getCode(), "MYR");
     }
     @Test
-    public void valutaConvertUsdToMyr(){
+    public void valutaConvertUsdToMyr() throws EntityNotFoundException{
     
         Double result = 214.9263091878332;
         
