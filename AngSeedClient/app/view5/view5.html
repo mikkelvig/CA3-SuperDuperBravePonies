@@ -301,7 +301,7 @@ and open the template in the editor.
         <p>
             Steffen stod for deployment til openshift, J-Unit test samt lidt frontend.
             Mikkel lavede Facade-klasser, Rest-Api'er, lidt frontend samt RestAssured tests.
-            Bente lavede frontend samt karma test.
+            Bente lavede frontend, exceptions samt karma test.
         </p>
         <p>
             I forhold til hvor mange point vi hver skal have for indsats:</p>
@@ -334,6 +334,27 @@ and open the template in the editor.
         </p><br><p>
             På siden All Users kan man som admin se en tabel over alle users, hvilke roller de har, samt slette dem. Dette sker ved at trykke på delete, ud fra den user man ønsker at slette.
         </p>
-
+        <br>
+        <h4><b>Fejlhåndtering:</b></h4>
+        <p>Til Fejlhåndtering har vi lavet vores egen <b>EntityNotFoundException</b> med tilhørende Mapper-klasse. 
+            Den bliver kastet når man forsøger at finde en user eller currency eller slette en user, som ikke eksisterer i databasen. 
+            Selve beskeden ser således ud, hvis man bruger et id der ikke findes:
+            {"Code":404,"Message":"No user found with requested Id"}
+            Og hvis man forsøger at at hente alle users, og der ikke er nogen i databasen:
+            {"Code":404,"Message":"No users in database"}
+        </p><br><p>
+            Derudover har vi en <b>NotFoundExceptionMapper</b>. Forsøger man eksempelvis at bruge en URL der ikke findes:
+            http://ca3superduperbraveponies-smcphbusiness.rhcloud.com/ca3/api/demoadmin/scoopiDooo
+            Får man denne fejlbesked:
+            {"Code":404,"Message":"The page/service you requested does not exist"}
+        </p><br><p>
+            Til sidst har vi en <b>GenericExceptionMapper</b>, som implementerer ExceptionMapper Throwable, til at håndtere resten. 
+            Denne bliver eksempelvis kastet, når man forsøger at finde en user med URL'en, og indtaster en user der ikke eksisterer.
+            Altså, skriver man dette i URL'en:
+            http://ca3superduperbraveponies-smcphbusiness.rhcloud.com/ca3/api/demoadmin/user/stormtrooper
+            får man denne fejlbesked:
+            {"Code":500,"Message":"Internal server Error, we are very sorry for the inconvenience"}
+        </p>
+        <br><br><br><br><br><br>
     </body>
 </html>

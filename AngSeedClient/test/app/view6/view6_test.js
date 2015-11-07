@@ -18,14 +18,16 @@ describe('myApp.view6 view6Ctrl', function () {
             httpBackendMock.flush();
             expect(scope.currencyList[0].description).toBe("MonoppoliKroner");
             expect(scope.currencyList[1].code).toBe("MP");
+            console.log("currency 0: "+scope.currencyList[0].description);
+            console.log("currency 1: "+scope.currencyList[1].code);
         });
     });
 
     describe('view6 http get call though the controller', function () {
         it('should return a list with two currencies', function () {
-            expect(scope.info).toBeUndefined();
             httpBackendMock.flush();
             expect(scope.currencyList.length).toBe(2);
+            console.log("currencyList length: "+scope.currencyList.length);
         });
     });
 });

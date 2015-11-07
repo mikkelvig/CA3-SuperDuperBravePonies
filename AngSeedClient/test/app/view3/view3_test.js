@@ -1,7 +1,7 @@
 describe('myApp.view3 view3Ctrl', function () {
 
     var scope, httpBackendMock, ctrl;
-    var testResponse = {message: "Test Message Mock", serverTime: "10-23-2015 17:35:21"};
+    var testResponse = {message: "I am in view 3", serverTime: "11-07-2015 07:35:21"};
     var testUserList = [{user: "tomBrady", password: "test", role: ["User"]}, {user: "ronGronkowski", password: "test", role: ["User"]}];
     beforeEach(module('myApp.view3'));
 
@@ -17,8 +17,10 @@ describe('myApp.view3 view3Ctrl', function () {
         it('Should fetch a test message', function () {
             expect(scope.data).toBeUndefined();
             httpBackendMock.flush();
-            expect(scope.data.message).toEqual("Test Message Mock");
-            expect(scope.data.serverTime).toEqual("10-23-2015 17:35:21");
+            expect(scope.data.message).toEqual("I am in view 3");
+            expect(scope.data.serverTime).toEqual("11-07-2015 07:35:21");
+            console.log("msg view 3: "+scope.data.message);
+            console.log("serverTime view 3: "+scope.data.serverTime);
         });
     });
 
@@ -28,6 +30,8 @@ describe('myApp.view3 view3Ctrl', function () {
             httpBackendMock.flush();
             expect(scope.userList[0].user).toBe("tomBrady");
             expect(scope.userList[1].user).toBe("ronGronkowski");
+            console.log("user 0: "+scope.userList[0].user);
+            console.log("user 1: "+scope.userList[1].user);
         });
     });
 
@@ -35,6 +39,7 @@ describe('myApp.view3 view3Ctrl', function () {
         it('should return a list with two users', function () {
             httpBackendMock.flush();
             expect(scope.userList.length).toBe(2);
+            console.log("userlist length: "+scope.userList.length);
         });
     });
 

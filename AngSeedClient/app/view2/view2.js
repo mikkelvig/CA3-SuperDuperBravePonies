@@ -10,7 +10,8 @@ angular.module('myApp.view2', ['ngRoute'])
             }])
 
         .controller('View2Ctrl', function ($http, $scope) {
-            $http({
+            $scope.getCvrMessage = "";
+                    $http({
                 method: 'GET',
                 url: 'api/demouser'
             }).then(function successCallback(res) {
@@ -20,11 +21,13 @@ angular.module('myApp.view2', ['ngRoute'])
             });
           
             $scope.getCompany = function () {
+                $scope.getCvrMessage = "";
                 var url = 'api/company/'+$scope.feedback.option + "/" + $scope.feedback.search+ "/" + $scope.feedback.country;
                 $http.get(url).then(function successCallback(res) {
                     $scope.companylist = res.data;
                 }, function errorCallback(res) {
                 $scope.error = res.status + ": " + res.data.statusText;
+                $scope.getCvrMessage = "No company found";
             });
             };
          
